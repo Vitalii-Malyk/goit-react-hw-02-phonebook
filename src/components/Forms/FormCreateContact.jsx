@@ -5,17 +5,20 @@ class FormCreateContact extends Component {
   state = {
     name: '',
     id: '',
+    number: '',
   };
 
   nameInputId = nanoid();
+  telInputId = nanoid();
 
-  handleChange = ({ target: { value } }) => {
-    this.setState({ name: value });
+  handleChange = ({ target: { value, name } }) => {
+    this.setState({ [name]: value, id: nanoid() });
   };
 
   resetForm = () => {
     this.setState({
       name: '',
+      number: '',
     });
   };
 
@@ -39,6 +42,16 @@ class FormCreateContact extends Component {
           value={this.state.name}
           required
         />
+        <input
+          type="tel"
+          id={this.telInputId}
+          onChange={this.handleChange}
+          name="number"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          value={this.state.number}
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          required
+        ></input>
         <button type="submit">Add contact</button>
       </form>
     );

@@ -1,19 +1,31 @@
 import { Component } from 'react';
 import CreateListContact from './CreateListContact/CreateListContact';
 import FormCreateContact from './Forms/FormCreateContact';
+import dataContactsDefault from 'dataFiles/dataContacts.json';
 
 export class App extends Component {
   state = {
-    contacts: [],
+    contacts: dataContactsDefault,
+    filter: '',
     name: '',
+    number: '',
   };
 
-  formSubmitHandler = ({ name }) => {
-    this.setState({ name: name });
+  formSubmitHandler = newContact => {
+    let nameArr = [];
+    nameArr = this.state.contacts.map(el => el.name);
+    if (!nameArr.includes(newContact.name)) {
+      let newArrContacts = [
+        ...this.state.contacts,
+        { id: newContact.id, name: newContact.name, number: newContact.number },
+      ];
+      return this.setState({ ...this.state, contacts: newArrContacts });
+    } else {
+      alert(' Контакт вже є у телефонній книзі!');
+    }
   };
 
   render() {
-    console.log(this.state.name);
     return (
       <div
         style={{
@@ -26,7 +38,7 @@ export class App extends Component {
         }}
       >
         <FormCreateContact onSubmit={this.formSubmitHandler} />
-        <CreateListContact nameContact={this.state.name} />
+        <CreateListContact nameContact={this.state.contacts} />
       </div>
     );
   }
