@@ -2,19 +2,15 @@ import { Component } from 'react';
 import { nanoid } from 'nanoid';
 
 class CreateListContact extends Component {
-  state = {
-    contacts: [],
-  };
-
   deleteId = Id => {
     this.props.deleted(Id);
   };
 
   createContactItem = () => {
-    return this.props.nameContact.map(contact => {
+    return this.props.contact.map(contact => {
       return (
         <li key={nanoid()} id={contact.id}>
-          {`${contact.name} ${contact.number}`}
+          {`${contact.name} : ${contact.number}`}
           <button
             data-id={contact.id}
             onClick={() => this.deleteId(contact.id)}

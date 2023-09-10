@@ -11,11 +11,13 @@ export class App extends Component {
   state = {
     contacts: dataContactsDefault,
     filter: '',
-    name: '',
-    number: '',
   };
 
-  formSubmitHandler = newContact => {
+  formSubmitHandler = data => {
+    this.repeatControl(data);
+  };
+
+  repeatControl = newContact => {
     let nameArr = [];
     nameArr = this.state.contacts.map(el => el.name);
     if (!nameArr.includes(newContact.name)) {
@@ -34,7 +36,7 @@ export class App extends Component {
     return newArr;
   };
 
-  deleteContactFromContactList = idContact => {
+  deleteContactFromList = idContact => {
     let newArrAfterDel = this.elementDelete(this.state.contacts, idContact);
     this.setState({
       ...this.state,
@@ -42,12 +44,23 @@ export class App extends Component {
     });
   };
 
+  // filterContacts = value => {
+  //   this.setState(prev => ({
+  //     contacts: prev.contacts.filter(el =>
+  //       el.name.toLowerCase().includes(value.toLowerCase())
+  //     ),
+  //   }));
+  // };
+
   filterContacts = value => {
-    this.setState(prev => ({
-      contacts: prev.contacts.filter(el =>
-        el.name.toLowerCase().includes(value.toLowerCase())
-      ),
-    }));
+    this.setState({ ...this.state, filter: `${value.toLowerCase()}` });
+  };
+
+  filterArr = fArr => {
+    let newArr = fArr.filter(cur =>
+      cur.name.toLowerCase().includes(this.state.filter)
+    );
+    return newArr;
   };
 
   render() {
@@ -69,8 +82,8 @@ export class App extends Component {
         <FormCreateContact onSubmit={this.formSubmitHandler} />
         <FilterContacts filterContacts={this.filterContacts} />
         <CreateListContact
-          nameContact={this.state.contacts}
-          deleted={this.deleteContactFromContactList}
+          contact={this.filterArr(this.state.contacts)}
+          deleted={this.deleteContactFromList}
         />
       </div>
     );
