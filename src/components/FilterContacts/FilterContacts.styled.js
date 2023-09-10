@@ -6,7 +6,6 @@ export const WrapElementStyle = styled('div')(() => {
     flexDirection: 'column',
     gap: '18px',
     width: 'fit-content',
-    marginTop: '70px',
   };
 });
 

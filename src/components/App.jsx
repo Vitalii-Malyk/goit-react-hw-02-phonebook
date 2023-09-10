@@ -72,7 +72,9 @@ export class App extends Component {
           backgroundPosition: 'center center',
         }}
       >
+        <h1>Phonebook</h1>
         <FormCreateContact onSubmit={this.formSubmitHandler} />
+        <h2>Contacts</h2>
         <FilterContacts filterContacts={this.filterContacts} />
         <CreateListContact
           contact={this.filterArr(this.state.contacts)}

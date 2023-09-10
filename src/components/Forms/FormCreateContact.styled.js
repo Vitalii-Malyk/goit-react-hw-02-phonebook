@@ -27,5 +27,6 @@ export const ButtonElementStyle = styled('button')(() => {
     color: 'darkslategray',
     padding: '4px',
     fontSize: '16px',
+    cursor: 'pointer',
   };
 });
