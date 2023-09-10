@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import CreateListContact from './CreateListContact/CreateListContact';
 import FormCreateContact from './Forms/FormCreateContact';
@@ -27,7 +28,10 @@ export class App extends Component {
       ];
       return this.setState({ ...this.state, contacts: newArrContacts });
     } else {
-      alert('The contact is already in the phone book!');
+      Notify.info('The contact is already in the phone book!', {
+        position: 'center-center',
+        timeout: '1500',
+      });
     }
   };
 
