@@ -1,10 +1,13 @@
 import { Component } from 'react';
-// import Contact from '../Contact/Contact';
 import { nanoid } from 'nanoid';
 
 class CreateListContact extends Component {
   state = {
     contacts: [],
+  };
+
+  deleteId = Id => {
+    this.props.deleted(Id);
   };
 
   createContactItem = () => {
@@ -14,7 +17,7 @@ class CreateListContact extends Component {
           {`${contact.name} ${contact.number}`}
           <button
             data-id={contact.id}
-            // onClick={() => this.deleteId(contact.id)}
+            onClick={() => this.deleteId(contact.id)}
           >
             Delete
           </button>

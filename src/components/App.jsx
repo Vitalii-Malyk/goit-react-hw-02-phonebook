@@ -1,7 +1,11 @@
 import { Component } from 'react';
+
 import CreateListContact from './CreateListContact/CreateListContact';
 import FormCreateContact from './Forms/FormCreateContact';
+import FilterContacts from './FilterContacts/FilterContacts';
+
 import dataContactsDefault from 'dataFiles/dataContacts.json';
+import bgImage from '../helper/image/telefon-bgc.jpg';
 
 export class App extends Component {
   state = {
@@ -21,8 +25,29 @@ export class App extends Component {
       ];
       return this.setState({ ...this.state, contacts: newArrContacts });
     } else {
-      alert(' Контакт вже є у телефонній книзі!');
+      alert('The contact is already in the phone book!');
     }
+  };
+
+  elementDelete = (arr, idContact) => {
+    let newArr = arr.filter(elem => elem.id !== idContact);
+    return newArr;
+  };
+
+  deleteContactFromContactList = idContact => {
+    let newArrAfterDel = this.elementDelete(this.state.contacts, idContact);
+    this.setState({
+      ...this.state,
+      contacts: [...newArrAfterDel],
+    });
+  };
+
+  filterContacts = value => {
+    this.setState(prev => ({
+      contacts: prev.contacts.filter(el =>
+        el.name.toLowerCase().includes(value.toLowerCase())
+      ),
+    }));
   };
 
   render() {
@@ -32,13 +57,21 @@ export class App extends Component {
           height: '100vh',
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101',
+          fontSize: 32,
+          color: 'antiquewhite',
+          flexDirection: 'column',
+          backgroundImage: `url(${bgImage})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       >
         <FormCreateContact onSubmit={this.formSubmitHandler} />
-        <CreateListContact nameContact={this.state.contacts} />
+        <FilterContacts filterContacts={this.filterContacts} />
+        <CreateListContact
+          nameContact={this.state.contacts}
+          deleted={this.deleteContactFromContactList}
+        />
       </div>
     );
   }
