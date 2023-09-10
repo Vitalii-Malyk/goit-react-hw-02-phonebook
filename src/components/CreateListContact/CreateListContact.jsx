@@ -1,6 +1,12 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
 
+import {
+  ListElementStyle,
+  ItemElementStyle,
+  ButtonElementStyle,
+} from 'components/CreateListContact/CreateListContact.styled';
+
 class CreateListContact extends Component {
   deleteId = Id => {
     this.props.deleted(Id);
@@ -9,21 +15,21 @@ class CreateListContact extends Component {
   createContactItem = () => {
     return this.props.contact.map(contact => {
       return (
-        <li key={nanoid()} id={contact.id}>
+        <ItemElementStyle key={nanoid()} id={contact.id}>
           {`${contact.name} : ${contact.number}`}
-          <button
+          <ButtonElementStyle
             data-id={contact.id}
             onClick={() => this.deleteId(contact.id)}
           >
-            Delete
-          </button>
-        </li>
+            x
+          </ButtonElementStyle>
+        </ItemElementStyle>
       );
     });
   };
 
   render() {
-    return <ul>{this.createContactItem()}</ul>;
+    return <ListElementStyle>{this.createContactItem()}</ListElementStyle>;
   }
 }
 

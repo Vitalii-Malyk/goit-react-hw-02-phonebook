@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+import {
+  WrapElementStyle,
+  InputElementStyle,
+} from 'components/FilterContacts/FilterContacts.styled';
+
 class FilterContacts extends Component {
   state = {
     filter: '',
@@ -11,16 +16,16 @@ class FilterContacts extends Component {
 
   render() {
     return (
-      <div>
-        <label htmlFor={this.nameInputId}>FilterContacts</label>
-        <input
+      <WrapElementStyle>
+        <label htmlFor={this.nameInputId}>Filter contacts:</label>
+        <InputElementStyle
           onChange={this.handleChange}
           id={this.nameInputId}
           type="text"
           name="name"
           value={this.state.filter}
         />
-      </div>
+      </WrapElementStyle>
     );
   }
 }

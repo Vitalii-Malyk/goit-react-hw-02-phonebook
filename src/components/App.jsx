@@ -44,14 +44,6 @@ export class App extends Component {
     });
   };
 
-  // filterContacts = value => {
-  //   this.setState(prev => ({
-  //     contacts: prev.contacts.filter(el =>
-  //       el.name.toLowerCase().includes(value.toLowerCase())
-  //     ),
-  //   }));
-  // };
-
   filterContacts = value => {
     this.setState({ ...this.state, filter: `${value.toLowerCase()}` });
   };
@@ -70,13 +62,14 @@ export class App extends Component {
           height: '100vh',
           display: 'flex',
           justifyContent: 'center',
-          fontSize: 32,
+          fontSize: 24,
           color: 'antiquewhite',
           flexDirection: 'column',
           backgroundImage: `url(${bgImage})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          overflow: 'unset',
+          backgroundPosition: 'center center',
         }}
       >
         <FormCreateContact onSubmit={this.formSubmitHandler} />
