@@ -15,7 +15,7 @@ class CreateListContact extends Component {
   createContactItem = () => {
     return this.props.contact.map(contact => {
       return (
-        <ItemElementStyle key={nanoid()} id={contact.id}>
+        <ItemElementStyle key={nanoid()}>
           {`${contact.name} : ${contact.number}`}
           <ButtonElementStyle
             data-id={contact.id}
